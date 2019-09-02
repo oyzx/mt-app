@@ -58,16 +58,30 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
-    extend (config, ctx) {
-      // if (ctx.isDev && ctx.isClient) {
-      //   config.module.rules.push({
-      //     enforce: 'pre',
-      //     test: /\.(js|vue)$/,
-      //     loader: 'eslint-loader',
-      //     exclude: /(node_modules)/
-      //   })
-      // }
+    // extend (config, ctx) {
+    //   // if (ctx.isDev && ctx.isClient) {
+    //   //   config.module.rules.push({
+    //   //     enforce: 'pre',
+    //   //     test: /\.(js|vue)$/,
+    //   //     loader: 'eslint-loader',
+    //   //     exclude: /(node_modules)/
+    //   //   })
+    //   // }
+    // },
+    extend(config, { isServer, isDev, isClient }) {
+      if (isServer) {
+        for (const rules of config.module.rules.filter(({ test }) =>
+          /\.((c|le|sa|sc)ss|styl.*)/.test(test.toString())
+        )) {
+          for (const rule of rules.oneOf || []) {
+            rule.use = rule.use.filter(
+              ({ loader }) => loader !== 'cache-loader'
+            )
+          }
+        }
+      }
     },
-    cache: true
+    // https://github.com/nuxt/nuxt.js/issues/3804
+    cache: false
   }
 }
