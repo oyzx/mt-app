@@ -1,9 +1,9 @@
 <template>
-  <div class="silder">
+  <div class="slide">
     <el-carousel height="240px">
       <el-carousel-item
         v-for="(item, idx) in list"
-        :key="item.img">
+        :key="idx">
         <img :src="item.img" alt="">
       </el-carousel-item>
     </el-carousel>
@@ -37,5 +37,6 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="scss">
+@import "@/assets/css/index/index.scss";
 </style>
