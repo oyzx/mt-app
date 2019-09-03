@@ -1,8 +1,8 @@
 <template>
   <el-container class="layout-default">
-    <el-header>
+    <header class="el-header">
       <my-header />
-    </el-header>
+    </header>
     <el-main><nuxt /></el-main>
     <el-footer>Footer</el-footer>
   </el-container>
@@ -16,4 +16,3 @@
     }
   }
 </script>
-
